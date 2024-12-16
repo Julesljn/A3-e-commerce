@@ -1,54 +1,57 @@
 @mixin heading-h1 {
-    font-family: $bellefair;
-    font-size: clamp(5rem, 5rem + 4.861vw, 9.375rem);
-}
-
-@mixin heading-h2 {
-    font-family: $bellefair;
-    font-size: 100px;
+font-family: $bellefair;
+font-size: #{clamp(5rem, 5rem + 4.861vw, 9.375rem)};
 }
 
 @mixin heading-h3 {
-    font-family: $bellefair;
-    font-size: clamp(1.5rem, 0.917rem + 2.87vw, 3.5rem);
-    text-transform: uppercase;
+font-family: $bellefair;
+font-size: #{clamp(1.5rem, 0.917rem + 2.87vw, 3.5rem)};
+text-transform: uppercase;
 }
 
 @mixin heading-h4 {
-    font-family: $bellefair;
-    font-size: clamp(1rem, 0.709rem + 1.435vw, 2rem);
-    text-transform: uppercase;
+font-family: $bellefair;
+font-size: #{clamp(1rem, 0.709rem + 1.435vw, 2rem)};
+text-transform: uppercase;
 }
 
 @mixin heading-h5 {
-    font-family: $bellefair;
-    font-size: clamp(1rem, 0.781rem + 1.076vw, 1.75rem);
-    letter-spacing: clamp(0.156rem, 0.116rem + 0.199vw, 0.295rem);
-}
-
-@mixin subheading-h1 {
-    font-family: $bellefair;
-    font-size: 28px;
-    text-transform: uppercase;
-}
-
-@mixin subheading-h2 {
-    font-family: $barlow-condensed;
-    font-size: 14px;
-    letter-spacing: 2.35px;
-    text-transform: uppercase;
-}
-
-@mixin nav-text {
-    font-family: $barlow-condensed;
-    font-size: 16px;
-    letter-spacing: 2.7px;
-    text-transform: uppercase;
+font-family: $bellefair;
+font-size: #{clamp(1rem, 0.781rem + 1.076vw, 1.75rem)};
+letter-spacing: #{clamp(0.156rem, 0.116rem + 0.199vw, 0.295rem)};
 }
 
 @mixin body-text {
-    font-family: $barlow-condensed;
-    font-size: clamp(0.875rem, 0.802rem + 0.359vw, 1.125rem);
-    font-weight: 500;
-    line-height: clamp(1.563rem, 1.435rem + 0.628vw, 2rem);
+font-family: $barlow-condensed;
+font-size: #{clamp(0.875rem, 0.802rem + 0.359vw, 1.125rem)};
+font-weight: 500;
+line-height: #{clamp(1.563rem, 1.435rem + 0.628vw, 2rem)};
+}
+
+
+@mixin subheading-h1 {
+font-family: $bellefair;
+font-size: 28px;
+text-transform: uppercase;
+}
+
+@mixin subheading-h2 {
+font-family: $barlow-condensed;
+font-size: 14px;
+letter-spacing: 2.35px;
+text-transform: uppercase;
+}
+
+@mixin nav-text {
+font-family: $barlow-condensed;
+font-size: 16px;
+letter-spacing: 2.7px;
+text-transform: uppercase;
+}
+
+@mixin body-text {
+font-family: $barlow-condensed;
+font-size: clamp(0.875rem, 0.802rem + 0.359vw, 1.125rem);
+font-weight: 500;
+line-height: clamp(1.563rem, 1.435rem + 0.628vw, 2rem);
 }

@@ -1,1 +1,575 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:rgba(0,0,0,0)}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-0.25em}sup{top:-0.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}*,*::before,*::after{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}img,picture,video,canvas,svg{display:block;max-width:100%}input,button,textarea,select{font:inherit}p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word}#root,#__next{isolation:isolate}.hidden{display:none !important}body{min-height:100vh}.main-nav{align-items:center;display:flex;justify-content:space-between;margin-left:auto;margin-right:auto;width:90%;margin-bottom:48px;padding-top:24px}@media screen and (min-width: 48rem){.main-nav{margin-bottom:112px}}@media screen and (min-width: 64rem){.main-nav{margin-bottom:0}}.main-nav__logo{background-color:#fff;border-radius:50%}.main-nav__burger{cursor:pointer}@media screen and (min-width: 48rem){.main-nav__burger{display:none}}.desktop-navigation{display:none}@media screen and (min-width: 48rem){.desktop-navigation{display:block}}.desktop-navigation__nav-items{list-style-type:none;padding-left:0;display:flex;gap:40px}.desktop-navigation__nav-item{font-family:"Barlow Condensed",sans-serif;font-size:16px;letter-spacing:2.7px;text-transform:uppercase}.desktop-navigation__nav-item a{color:#fff;text-decoration:none}.navigation{position:absolute;right:0;top:0;width:75%;height:100vh;backdrop-filter:blur(32px)}.navigation__cross-icon{width:90%;display:flex;justify-content:flex-end;margin-bottom:64px;padding-top:32px;cursor:pointer}.navigation__nav-items{list-style-type:none;padding-left:32px}.navigation__nav-item{font-family:"Barlow Condensed",sans-serif;font-size:16px;letter-spacing:2.7px;text-transform:uppercase;margin-bottom:32px}.navigation__nav-item a{color:#fff;text-decoration:none}.navigation__page-number{font-weight:700}.home-page::before{background-image:url("../../public/img/bg-home-mobile.jpg");background-repeat:no-repeat;background-size:cover;content:"";height:100vh;left:0;position:absolute;top:0;width:100vw;z-index:-1}@media screen and (min-width: 48rem){.home-page::before{background-image:url("../../public/img/bg-home-tablet.jpg")}}@media screen and (min-width: 64rem){.home-page::before{background-image:url("../../public/img/bg-home-desktop.jpg");height:100%}}.home-page{color:#fff;margin-left:auto;margin-right:auto;text-align:center;width:90%}@media screen and (min-width: 48rem){.home-page{max-width:445px;padding-bottom:130px}}@media screen and (min-width: 64rem){.home-page{max-width:1440px;width:80%;text-align:left;display:flex;flex-direction:row;align-items:center;padding-bottom:0;height:80vh}}@media screen and (min-width: 64rem){.home-page__main-content{width:470px}}.home-page__first-paragraph{font-family:"Bellefair",serif;font-size:clamp(1rem,.781rem + 1.076vw,1.75rem);letter-spacing:clamp(.156rem,.116rem + .199vw,.295rem);text-transform:uppercase}.home-page__main-title{font-family:"Bellefair",serif;font-size:clamp(5rem,5rem + 4.861vw,9.375rem);margin-top:0;margin-bottom:0;text-transform:uppercase}.home-page__description{font-family:"Barlow Condensed",sans-serif;font-size:clamp(.875rem,.802rem + .359vw,1.125rem);font-weight:500;line-height:clamp(1.563rem,1.435rem + .628vw,2rem);margin-bottom:80px}@media screen and (min-width: 48rem){.home-page__description{margin-bottom:156px}}@media screen and (min-width: 64rem){.home-page__description{margin-bottom:0px}}.home-page__cta{align-items:center;background-color:#fff;border-radius:100%;color:#0b0d17;display:flex;font-size:20px;height:150px;justify-content:center;margin-left:auto;margin-right:auto;text-decoration:none;text-transform:uppercase;width:150px}@media screen and (min-width: 48rem){.home-page__cta{height:240px;width:240px;font-size:32px}}@media screen and (min-width: 64rem){.home-page__cta{margin-right:0}}.crew-page::before{background-image:url("../../public/img/bg-crew-mobile.jpg");background-repeat:no-repeat;background-size:cover;content:"";height:100vh;left:0;position:absolute;top:0;width:100vw;z-index:-1}@media screen and (min-width: 48rem){.crew-page::before{background-image:url("../../public/img/bg-crew-tablet.jpg")}}@media screen and (min-width: 64rem){.crew-page::before{background-image:url("../../public/img/bg-crew-desktop.jpg")}}.crew-page{color:#fff;margin-left:auto;margin-right:auto;text-align:center;width:90%;max-width:445px}@media screen and (min-width: 64rem){.crew-page{max-width:1024px;width:50%;text-align:left;margin-left:unset;margin-right:unset}}.crew-page__first-paragraph{font-family:"Bellefair",serif;font-size:clamp(1rem,.781rem + 1.076vw,1.75rem);letter-spacing:clamp(.156rem,.116rem + .199vw,.295rem);text-transform:uppercase;margin-bottom:32px}@media screen and (min-width: 48rem){.crew-page__first-paragraph{text-align:left;margin-bottom:60px}}.crew-page__crew-member{height:222px;margin-left:auto;margin-right:auto}@media screen and (min-width: 48rem){.crew-page__crew-member{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:450px}}@media screen and (min-width: 64rem){.crew-page__crew-member{bottom:0;left:unset;right:0;transform:unset}}.crew-page__bullets-list{border-top:1px solid #383b4b;display:flex;flex-direction:row;gap:16px;justify-content:center;list-style-type:none;margin-bottom:32px;padding-left:0;padding-top:32px}@media screen and (min-width: 48rem){.crew-page__bullets-list{border-top:none;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}}.crew-page__bullet{background-color:#fff;border-radius:100%;content:"";cursor:pointer;height:10px;opacity:.2;transition:.4s;width:10px}.crew-page__bullet:hover{opacity:.4}.crew-page__bullet--active{opacity:1}.crew-page__crew-role{font-family:"Bellefair",serif;font-size:clamp(1rem,.709rem + 1.435vw,2rem);text-transform:uppercase;opacity:.45}.crew-page__member-name{font-family:"Bellefair",serif;font-size:clamp(1.5rem,.917rem + 2.87vw,3.5rem);text-transform:uppercase;font-weight:300}.crew-page__member-description{font-family:"Barlow Condensed",sans-serif;font-size:clamp(.875rem,.802rem + .359vw,1.125rem);font-weight:500;line-height:clamp(1.563rem,1.435rem + .628vw,2rem);color:#d0d6f9}.destination-page::before{background-image:url("../../public/img/bg-destination-mobile.jpg");background-repeat:no-repeat;background-size:cover;content:"";height:120vh;left:0;position:absolute;top:0;width:100vw;z-index:-1}@media screen and (min-width: 48rem){.destination-page::before{background-image:url("../../public/img/bg-destination-tablet.jpg");height:100vh}}@media screen and (min-width: 48rem){.destination-page::before{background-image:url("../../public/img/bg-destination-desktop.jpg")}}.destination-page{color:#fff;margin-left:auto;margin-right:auto;text-align:center;width:90%;max-width:445px}@media screen and (min-width: 64rem){.destination-page{max-width:1440px;width:80%;display:flex;flex-direction:row;align-items:center;height:80vh;justify-content:space-between;text-align:left}}@media screen and (min-width: 64rem){.destination-page__destination-container{width:40%}}.destination-page__first-paragraph{font-family:"Bellefair",serif;font-size:clamp(1rem,.781rem + 1.076vw,1.75rem);letter-spacing:clamp(.156rem,.116rem + .199vw,.295rem);text-transform:uppercase;margin-bottom:32px}@media screen and (min-width: 48rem){.destination-page__first-paragraph{text-align:left;margin-bottom:60px}}.destination-page__planet-image{height:10.625rem;width:10.625rem;margin-left:auto;margin-right:auto;margin-bottom:24px}@media screen and (min-width: 48rem){.destination-page__planet-image{height:300px;width:300px;margin-bottom:56px}}@media screen and (min-width: 64rem){.destination-page__planet-image{max-width:445px;width:auto;height:auto}}@media screen and (min-width: 64rem){.destination-page__planets-data{width:40%}}.destination-page__planets-list{padding-left:0;list-style-type:none;display:flex;gap:24px;justify-content:center;margin-bottom:24px}@media screen and (min-width: 48rem){.destination-page__planets-list{margin-bottom:32px}}@media screen and (min-width: 64rem){.destination-page__planets-list{justify-content:start}}.destination-page__planet{font-family:"Barlow Condensed",sans-serif;font-size:16px;letter-spacing:2.7px;text-transform:uppercase;cursor:pointer;color:#d0d6f9;transition:.4s;border-bottom:3px solid rgba(0,0,0,0)}.destination-page__planet:hover{color:#fff}.destination-page__planet--active{color:#fff;border-bottom:3px solid #fff}.destination-page__planet-name{font-family:"Bellefair",serif;font-size:clamp(1.5rem,.917rem + 2.87vw,3.5rem);text-transform:uppercase;margin-top:0;margin-bottom:0;text-transform:uppercase}.destination-page__planet-description{font-family:"Barlow Condensed",sans-serif;font-size:clamp(.875rem,.802rem + .359vw,1.125rem);font-weight:500;line-height:clamp(1.563rem,1.435rem + .628vw,2rem);color:#d0d6f9;margin-bottom:32px}.destination-page__travel-info{border-top:1px solid #383b4b;padding-top:32px;list-style-type:none;padding-left:0}@media screen and (min-width: 48rem){.destination-page__travel-info{display:flex;justify-content:space-evenly;align-items:baseline}}@media screen and (min-width: 64rem){.destination-page__travel-info{justify-content:space-between}}.destination-page__avg-distance{font-family:"Barlow Condensed",sans-serif;font-size:14px;letter-spacing:2.35px;text-transform:uppercase;display:flex;flex-direction:column;margin-bottom:32px;color:#d0d6f9}.destination-page__avg-distance-value{font-family:"Bellefair",serif;font-size:28px;text-transform:uppercase;color:#fff}.destination-page__travel-time{font-family:"Barlow Condensed",sans-serif;font-size:14px;letter-spacing:2.35px;text-transform:uppercase;display:flex;flex-direction:column;color:#d0d6f9}.destination-page__travel-time-value{font-family:"Bellefair",serif;font-size:28px;text-transform:uppercase;color:#fff}.technology-page::before{background-image:url("../../public/img/bg-technology-mobile.jpg");background-repeat:no-repeat;background-size:cover;content:"";height:100vh;left:0;position:absolute;top:0;width:100vw;z-index:-1}@media screen and (min-width: 48rem){.technology-page::before{background-image:url("../../public/img/bg-technology-tablet.jpg")}}.technology-page{color:#fff;margin-left:auto;margin-right:auto;text-align:center;width:90%;max-width:445px}.technology-page__first-paragraph{font-family:"Bellefair",serif;font-size:clamp(1rem,.781rem + 1.076vw,1.75rem);letter-spacing:clamp(.156rem,.116rem + .199vw,.295rem);text-transform:uppercase;margin-bottom:32px}.technology-page__main-img{background-image:url("../../public/img/launch-vehicle-landscape.jpg");background-repeat:no-repeat;background-size:cover;height:170px;margin-bottom:32px}@media screen and (min-width: 48rem){.technology-page__main-img{height:310px;margin-bottom:56px}}.technology-page__technology-steps{list-style-type:none;padding-left:0;display:flex;flex-direction:row;justify-content:center;gap:1rem}@media screen and (min-width: 48rem){.technology-page__technology-steps{margin-bottom:45px}}.technology-page__technology-step{height:40px;width:40px;border-radius:100%;border:1px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:24px;transition:.4s}@media screen and (min-width: 48rem){.technology-page__technology-step{height:60px;width:60px}}.technology-page__technology-step:hover{background-color:hsla(0,0%,100%,.2666666667)}.technology-page__technology-step--active{background-color:#fff;color:#0b0d17}.technology-page__technology-heading{font-family:"Bellefair",serif;font-size:clamp(1rem,.709rem + 1.435vw,2rem);text-transform:uppercase;margin-bottom:8px}.technology-page__technology-name{font-family:"Bellefair",serif;font-size:clamp(1.5rem,.917rem + 2.87vw,3.5rem);text-transform:uppercase;margin-bottom:16px}.technology-page__technology-description{font-family:"Barlow Condensed",sans-serif;font-size:clamp(.875rem,.802rem + .359vw,1.125rem);font-weight:500;line-height:clamp(1.563rem,1.435rem + .628vw,2rem);color:#d0d6f9}/*# sourceMappingURL=main.css.map */
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+     ========================================================================== */
+/**
+   * Remove the margin in all browsers.
+   */
+body {
+  margin: 0;
+}
+
+/**
+   * Render the `main` element consistently in IE.
+   */
+main {
+  display: block;
+}
+
+/**
+   * Correct the font size and margin on `h1` elements within `section` and
+   * `article` contexts in Chrome, Firefox, and Safari.
+   */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+     ========================================================================== */
+/**
+   * 1. Add the correct box sizing in Firefox.
+   * 2. Show the overflow in Edge and IE.
+   */
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+   * 1. Correct the inheritance and scaling of font size in all browsers.
+   * 2. Correct the odd `em` font sizing in all browsers.
+   */
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+     ========================================================================== */
+/**
+   * Remove the gray background on active links in IE 10.
+   */
+a {
+  background-color: transparent;
+}
+
+/**
+   * 1. Remove the bottom border in Chrome 57-
+   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+   */
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+   * Add the correct font weight in Chrome, Edge, and Safari.
+   */
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+   * 1. Correct the inheritance and scaling of font size in all browsers.
+   * 2. Correct the odd `em` font sizing in all browsers.
+   */
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+   * Add the correct font size in all browsers.
+   */
+small {
+  font-size: 80%;
+}
+
+/**
+   * Prevent `sub` and `sup` elements from affecting the line height in
+   * all browsers.
+   */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+     ========================================================================== */
+/**
+   * Remove the border on images inside links in IE 10.
+   */
+img {
+  border-style: none;
+}
+
+/* Forms
+     ========================================================================== */
+/**
+   * 1. Change the font styles in all browsers.
+   * 2. Remove the margin in Firefox and Safari.
+   */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+   * Show the overflow in IE.
+   * 1. Show the overflow in Edge.
+   */
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+   * Remove the inheritance of text transform in Edge, Firefox, and IE.
+   * 1. Remove the inheritance of text transform in Firefox.
+   */
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+   * Correct the inability to style clickable types in iOS and Safari.
+   */
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+
+/**
+   * Remove the inner border and padding in Firefox.
+   */
+button::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+   * Restore the focus styles unset by the previous rule.
+   */
+button:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+   * Correct the padding in Firefox.
+   */
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+   * 1. Correct the text wrapping in Edge and IE.
+   * 2. Correct the color inheritance from `fieldset` elements in IE.
+   * 3. Remove the padding so developers are not caught out when they zero out
+   *    `fieldset` elements in all browsers.
+   */
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+   * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+   */
+progress {
+  vertical-align: baseline;
+}
+
+/**
+   * Remove the default vertical scrollbar in IE 10+.
+   */
+textarea {
+  overflow: auto;
+}
+
+/**
+   * 1. Add the correct box sizing in IE 10.
+   * 2. Remove the padding in IE 10.
+   */
+[type=checkbox],
+[type=radio] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+   * Correct the cursor style of increment and decrement buttons in Chrome.
+   */
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+   * 1. Correct the odd appearance in Chrome and Safari.
+   * 2. Correct the outline style in Safari.
+   */
+[type=search] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+   * Remove the inner padding in Chrome and Safari on macOS.
+   */
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+   * 1. Correct the inability to style clickable types in iOS and Safari.
+   * 2. Change font properties to `inherit` in Safari.
+   */
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+     ========================================================================== */
+/*
+   * Add the correct display in Edge, IE 10+, and Firefox.
+   */
+details {
+  display: block;
+}
+
+/*
+   * Add the correct display in all browsers.
+   */
+summary {
+  display: list-item;
+}
+
+/* Misc
+     ========================================================================== */
+/**
+   * Add the correct display in IE 10+.
+   */
+template {
+  display: none;
+}
+
+/**
+   * Add the correct display in IE 10.
+   */
+[hidden] {
+  display: none;
+}
+
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.main-nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-bottom: 48px;
+  padding-top: 24px;
+}
+@media screen and (min-width: 48rem) {
+  .main-nav {
+    margin-bottom: 112px;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .main-nav {
+    margin-bottom: 0;
+  }
+}
+.main-nav__logo {
+  background-color: #FFFFFF;
+  border-radius: 50%;
+}
+.main-nav__burger {
+  cursor: pointer;
+}
+@media screen and (min-width: 48rem) {
+  .main-nav__burger {
+    display: none;
+  }
+}
+
+.desktop-navigation {
+  display: none;
+}
+@media screen and (min-width: 48rem) {
+  .desktop-navigation {
+    display: block;
+  }
+}
+.desktop-navigation__nav-items {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  gap: 40px;
+}
+.desktop-navigation__nav-item {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+}
+.desktop-navigation__nav-item a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.navigation {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 75%;
+  height: 100vh;
+  backdrop-filter: blur(32px);
+}
+.navigation__cross-icon {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 64px;
+  padding-top: 32px;
+  cursor: pointer;
+}
+.navigation__nav-items {
+  list-style-type: none;
+  padding-left: 32px;
+}
+.navigation__nav-item {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.navigation__nav-item a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.navigation__page-number {
+  font-weight: 700;
+}
+
+.home-page::before {
+  background-image: url("/img/bg-home-mobile.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: "";
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+@media screen and (min-width: 48rem) {
+  .home-page::before {
+    background-image: url("/img/bg-home-tablet.jpg");
+  }
+}
+@media screen and (min-width: 64rem) {
+  .home-page::before {
+    background-image: url("/img/bg-home-desktop.jpg");
+    height: 100%;
+  }
+}
+
+.home-page {
+  color: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 90%;
+}
+@media screen and (min-width: 48rem) {
+  .home-page {
+    max-width: 445px;
+    padding-bottom: 130px;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .home-page {
+    max-width: 1440px;
+    width: 80%;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 0;
+    height: 80vh;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .home-page__main-content {
+    width: 470px;
+  }
+}
+.home-page__first-paragraph {
+  font-family: "Bellefair", serif;
+  font-size: clamp(1rem, 0.781rem + 1.076vw, 1.75rem);
+  letter-spacing: clamp(0.156rem, 0.116rem + 0.199vw, 0.295rem);
+  text-transform: uppercase;
+}
+.home-page__main-title {
+  font-family: "Bellefair", serif;
+  font-size: clamp(5rem, 5rem + 4.861vw, 9.375rem);
+  margin-top: 0;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+.home-page__description {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(0.875rem, 0.802rem + 0.359vw, 1.125rem);
+  font-weight: 500;
+  line-height: clamp(1.563rem, 1.435rem + 0.628vw, 2rem);
+  margin-bottom: 80px;
+}
+@media screen and (min-width: 48rem) {
+  .home-page__description {
+    margin-bottom: 156px;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .home-page__description {
+    margin-bottom: 0px;
+  }
+}
+.home-page__cta {
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 100%;
+  color: #0B0D17;
+  display: flex;
+  font-size: 20px;
+  height: 150px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 150px;
+}
+@media screen and (min-width: 48rem) {
+  .home-page__cta {
+    height: 240px;
+    width: 240px;
+    font-size: 32px;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .home-page__cta {
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,5 +1,5 @@
 .home-page::before {
-  background-image: url("../../public/img/bg-home-mobile.jpg");
+  background-image: url("/img/bg-home-mobile.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   content: "";
@@ -11,11 +11,11 @@
   z-index: -1;
 
   @media screen and (min-width: $tablet) {
-    background-image: url("../../public/img/bg-home-tablet.jpg");
+    background-image: url("/img/bg-home-tablet.jpg");
   }
 
   @media screen and (min-width: $desktop) {
-    background-image: url("../../public/img/bg-home-desktop.jpg");
+    background-image: url("/img/bg-home-desktop.jpg");
     height: 100%;
   }
 }
