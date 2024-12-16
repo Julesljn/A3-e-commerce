@@ -4,33 +4,31 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use PDO;
+use App\Database\Database;
 
 class ProductRepository
 {
-    private PDO $db;
+    private $db;
 
-    public function __construct(PDO $db)
+    public function __construct()
     {
-        $this->db = $db;
+        $this->db = new Database;
     }
 
-    public function findAll(): array
+    public function findAll()
     {
-        $sql = "SELECT * FROM product";
-        $stmt = $this->db->query($sql);
-
+        $fetchData = $this->db->read('product');
         $products = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        foreach ($fetchData as $row) {
             $products[] = new Product(
-                $row['name'],
-                (float) $row['price'],
-                $row['description'],
-                (int) $row['categoryId'],
-                (int) $row['brandId'],
-                $row['id']
+                name: $row['name'],
+                price: (float) $row['price'],
+                description: $row['description'],
+                categoryId: (int) $row['categoryId'],
+                brandId: (int) $row['brandId'],
+                id: $row['id']
             );
         }
-
         return $products;
     }
 }

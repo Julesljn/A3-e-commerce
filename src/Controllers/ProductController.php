@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Repositories\ProductRepository;
-use App\Database\Database;
 use Twig\Environment;
 
 class ProductController
@@ -13,7 +12,7 @@ class ProductController
 
     public function __construct(Environment $twig)
     {
-        $this->productRepository = new ProductRepository(Database::getConnection());
+        $this->productRepository = new ProductRepository();
         $this->twig = $twig;
     }
 
