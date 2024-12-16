@@ -2,7 +2,18 @@
 
 <main class="home-page">
   <div class="home-page__main-content">
-    E-commerce webpage
+    <h1>E-commerce webpage</h1>
+
+    <div class="products">
+      {% for product in products %}
+        <div class="product-item">
+          <h2>{{ product.getName }}</h2>
+          <p>{{ product.getDescription }}</p>
+          <p>Prix : {{ product.getPrice }} €</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 </main>
 
 {% include './includes/footer.twig' %}

@@ -1,17 +1,23 @@
 <?php
 
+use App\Controllers\ProductController;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
+
 require_once __DIR__ . '/../vendor/autoload.php';
+
+$loader = new FilesystemLoader(__DIR__ . '/../src/Views');
+$twig = new Environment($loader);
+
+$controller = new ProductController($twig);
 
 $request = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../src/Views');
-
-$twig = new \Twig\Environment($loader);
-
+// Routage
 switch ($request) {
     case '':
     case '/':
-        echo $twig->render('home.twig');
+        $controller->showHomePage();
         break;
 
     case '/crew':
