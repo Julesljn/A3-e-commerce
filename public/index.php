@@ -1,15 +1,12 @@
 <?php
 
 use App\Controllers\ProductController;
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
+use App\Controllers\UserController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$loader = new FilesystemLoader(__DIR__ . '/../src/Views');
-$twig = new Environment($loader);
-
-$controller = new ProductController($twig);
+$productController = new ProductController();
+$userController = new UserController();
 
 $request = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
@@ -17,23 +14,27 @@ $request = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 switch ($request) {
     case '':
     case '/':
-        $controller->showHomePage();
+        $productController->showHomePage();
         break;
 
-    case '/crew':
-        echo $twig->render('crew.twig');
+    case '/register':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->handleRegister();
+        } else {
+            $userController->showRegisterPage();
+        }
         break;
 
-    case '/destination':
-        echo $twig->render('destination.twig');
-        break;
-
-    case '/technology':
-        echo $twig->render('technology.twig');
+    case '/login':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->handleLogin();
+        } else {
+            $userController->showLoginPage();
+        }
         break;
 
     default:
         http_response_code(404);
-        echo $twig->render('404.twig');
+        $productController->render('404.twig');
         break;
 }

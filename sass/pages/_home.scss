@@ -15,7 +15,8 @@
   }
 
   @media screen and (min-width: $desktop) {
-    background-image: url("/img/bg-home-desktop.jpg");
+    background-image: url("/img/chien.jpg");
+    background-position: center;
     height: 100%;
   }
 }
@@ -45,7 +46,7 @@
 
   &__main-content {
     @media screen and (min-width: $desktop) {
-      width: 470px;
+      height: 50%;
     }
   }
 
@@ -102,5 +103,22 @@
       margin-right: 0;
     }
   }
-}
-
+  .products {
+    padding: 20px;
+    border-radius: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    backdrop-filter: blur(10px);
+    background: rgba(8, 8, 8, 0.2);
+  }
+  .product-item {
+    padding: 8px;
+    background-color: black;
+  }
+  .cart-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  }

@@ -1,19 +1,121 @@
 {% include './includes/header.twig' %}
 
 <main class="home-page">
-  <div class="home-page__main-content">
     <h1>E-commerce webpage</h1>
 
+    <button id="view-cart-btn">Panier Chien 🦮</button>
+
     <div class="products">
-      {% for product in products %}
+        {% for product in products %}
         <div class="product-item">
-          <h2>{{ product.getName }}</h2>
-          <p>{{ product.getDescription }}</p>
-          <p>Prix : {{ product.getPrice }} €</p>
+            <h2>{{ product . getName }}</h2>
+            <p>{{ product . getDescription }}</p>
+            <p>Prix : {{ product . getPrice }} €</p>
+
+            <button class="add-to-cart-btn" data-id="{{ product . getId }}" data-name="{{ product . getName }}"
+                data-price="{{ product . getPrice }}">
+                Ajouter au panier
+            </button>
         </div>
-      {% endfor %}
+        {% endfor %}
     </div>
-  </div>
 </main>
 
+<div id="cart-modal"
+    style="display:none; position:absolute; top:0; right:0; background:white; border:1px solid #ccc; padding:20px; box-shadow:0px 4px 8px rgba(0,0,0,0.2);">
+    <h2>Votre Panier</h2>
+    <ul id="cart-items"></ul>
+    <button id="close-cart-btn">Fermer</button>
+</div>
+
 {% include './includes/footer.twig' %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        const viewCartButton = document.getElementById('view-cart-btn');
+        const cartModal = document.getElementById('cart-modal');
+        const cartItemsList = document.getElementById('cart-items');
+        const closeCartButton = document.getElementById('close-cart-btn');
+
+        const getCart = () => {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        };
+
+        const saveCart = (cart) => {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        };
+
+        const updateCartDisplay = () => {
+            const cart = getCart();
+            cartItemsList.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<li>Votre panier est vide.</li>';
+            } else {
+                cart.forEach((item, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                    ${item.name} - ${item.price}€ x ${item.quantity}
+                    <button class="remove-from-cart-btn" data-index="${index}" style="margin-left: 10px;">Supprimer</button>
+                `;
+                    cartItemsList.appendChild(listItem);
+                });
+            }
+
+            document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.dataset.index;
+                    removeFromCart(index);
+                });
+            });
+        };
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.dataset.id;
+                const productName = button.dataset.name;
+                const productPrice = button.dataset.price;
+
+                let cart = getCart();
+
+                const existingProduct = cart.find(item => item.id === productId);
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        quantity: 1
+                    });
+                }
+
+                saveCart(cart);
+                updateCartDisplay();
+            });
+        });
+
+        const removeFromCart = (index) => {
+            let cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            updateCartDisplay();
+        };
+
+        viewCartButton.addEventListener('click', () => {
+            if (cartModal.style.display === 'none' || cartModal.style.display === '') {
+                updateCartDisplay();
+                cartModal.style.display = 'block';
+            } else {
+                cartModal.style.display = 'none';
+            }
+        });
+
+        closeCartButton.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        updateCartDisplay();
+    });
+</script>
