@@ -1,19 +1,54 @@
 {% include './includes/header.twig' %}
-
+<div class="snow"></div>
 <main class="home-page">
-    <h1>E-commerce webpage</h1>
+    <h1>Catalogue des Produits</h1>
 
-    <button id="view-cart-btn">Panier Chien 🦮</button>
+    <button id="view-cart-btn" style="margin-bottom: 20px;">
+        Voir le Panier 🛒
+    </button>
+
+    <div class="filters">
+        <label for="filter-color">Couleur :</label>
+        <select id="filter-color">
+            <option value="">Toutes</option>
+            <option value="Red">Rouge</option>
+            <option value="Blue">Bleu</option>
+            <option value="Green">Vert</option>
+        </select>
+
+        <label for="filter-size">Taille :</label>
+        <select id="filter-size">
+            <option value="">Toutes</option>
+            <option value="38">38</option>
+            <option value="40">40</option>
+            <option value="42">42</option>
+        </select>
+
+        <label for="filter-price">Prix :</label>
+        <select id="filter-price">
+            <option value="">Tous</option>
+            <option value="low">Moins de 30€</option>
+            <option value="mid">30€ - 50€</option>
+            <option value="high">Plus de 50€</option>
+        </select>
+    </div>
 
     <div class="products">
         {% for product in products %}
-        <div class="product-item">
-            <h2>{{ product . getName }}</h2>
-            <p>{{ product . getDescription }}</p>
-            <p>Prix : {{ product . getPrice }} €</p>
+        <div class="product-item"
+             data-color="{{ product.getColors | join(',') }}"
+             data-size="{{ product.getSizes | join(',') }}"
+             data-price="{{ product.getPrice }}">
+            <h2>{{ product.getName }}</h2>
+            <p>{{ product.getDescription }}</p>
+            <p>Prix : {{ product.getPrice }} €</p>
+            <p>Couleurs : {{ product.getColors | join(', ') }}</p>
+            <p>Tailles : {{ product.getSizes | join(', ') }}</p>
 
-            <button class="add-to-cart-btn" data-id="{{ product . getId }}" data-name="{{ product . getName }}"
-                data-price="{{ product . getPrice }}">
+            <button class="add-to-cart-btn"
+                    data-id="{{ product.getId }}"
+                    data-name="{{ product.getName }}"
+                    data-price="{{ product.getPrice }}">
                 Ajouter au panier
             </button>
         </div>
@@ -30,92 +65,113 @@
 
 {% include './includes/footer.twig' %}
 
+
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-        const viewCartButton = document.getElementById('view-cart-btn');
-        const cartModal = document.getElementById('cart-modal');
-        const cartItemsList = document.getElementById('cart-items');
-        const closeCartButton = document.getElementById('close-cart-btn');
+    const filterColor = document.getElementById('filter-color');
+    const filterSize = document.getElementById('filter-size');
+    const filterPrice = document.getElementById('filter-price');
+    const products = document.querySelectorAll('.product-item');
 
-        const getCart = () => {
-            return JSON.parse(localStorage.getItem('cart')) || [];
-        };
+    const filterProducts = () => {
+        const selectedColor = filterColor.value.toLowerCase();
+        const selectedSize = filterSize.value;
+        const selectedPrice = filterPrice.value;
 
-        const saveCart = (cart) => {
-            localStorage.setItem('cart', JSON.stringify(cart));
-        };
+        products.forEach(product => {
+            const productColors = product.dataset.color.toLowerCase();
+            const productSizes = product.dataset.size;
+            const productPrice = parseFloat(product.dataset.price);
 
-        const updateCartDisplay = () => {
-            const cart = getCart();
-            cartItemsList.innerHTML = '';
+            const colorMatch = !selectedColor || productColors.includes(selectedColor);
+            const sizeMatch = !selectedSize || productSizes.includes(selectedSize);
+            let priceMatch = false;
 
-            if (cart.length === 0) {
-                cartItemsList.innerHTML = '<li>Votre panier est vide.</li>';
-            } else {
-                cart.forEach((item, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                    ${item.name} - ${item.price}€ x ${item.quantity}
-                    <button class="remove-from-cart-btn" data-index="${index}" style="margin-left: 10px;">Supprimer</button>
-                `;
-                    cartItemsList.appendChild(listItem);
-                });
+            switch (selectedPrice) {
+                case 'low':
+                    priceMatch = productPrice < 30;
+                    break;
+                case 'mid':
+                    priceMatch = productPrice >= 30 && productPrice <= 50;
+                    break;
+                case 'high':
+                    priceMatch = productPrice > 50;
+                    break;
+                default:
+                    priceMatch = true;
             }
 
-            document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const index = e.target.dataset.index;
-                    removeFromCart(index);
-                });
-            });
-        };
+            product.style.display = colorMatch && sizeMatch && priceMatch ? 'block' : 'none';
+        });
+    };
 
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const productId = button.dataset.id;
-                const productName = button.dataset.name;
-                const productPrice = button.dataset.price;
+    filterColor.addEventListener('change', filterProducts);
+    filterSize.addEventListener('change', filterProducts);
+    filterPrice.addEventListener('change', filterProducts);
 
-                let cart = getCart();
+    // Gestion du panier
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const cartItemsList = document.getElementById('cart-items');
+    const closeCartButton = document.getElementById('close-cart-btn');
 
-                const existingProduct = cart.find(item => item.id === productId);
-                if (existingProduct) {
-                    existingProduct.quantity += 1;
-                } else {
-                    cart.push({
-                        id: productId,
-                        name: productName,
-                        price: productPrice,
-                        quantity: 1
-                    });
-                }
+    const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+    const saveCart = (cart) => localStorage.setItem('cart', JSON.stringify(cart));
 
-                saveCart(cart);
-                updateCartDisplay();
+    const updateCartDisplay = () => {
+        const cart = getCart();
+        cartItemsList.innerHTML = cart.length === 0 
+            ? '<li>Votre panier est vide.</li>' 
+            : cart.map((item, index) => `
+                <li>
+                    ${item.name} - ${item.price}€ x ${item.quantity}
+                    <button class="remove-from-cart-btn" data-index="${index}">Supprimer</button>
+                </li>`).join('');
+
+        document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                removeFromCart(index);
             });
         });
+    };
 
-        const removeFromCart = (index) => {
-            let cart = getCart();
-            cart.splice(index, 1);
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const cart = getCart();
+            const existingProduct = cart.find(item => item.id === button.dataset.id);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({
+                    id: button.dataset.id,
+                    name: button.dataset.name,
+                    price: button.dataset.price,
+                    quantity: 1
+                });
+            }
             saveCart(cart);
             updateCartDisplay();
-        };
-
-        viewCartButton.addEventListener('click', () => {
-            if (cartModal.style.display === 'none' || cartModal.style.display === '') {
-                updateCartDisplay();
-                cartModal.style.display = 'block';
-            } else {
-                cartModal.style.display = 'none';
-            }
         });
+    });
 
-        closeCartButton.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-        });
+    const removeFromCart = (index) => {
+        const cart = getCart();
+        cart.splice(index, 1);
+        saveCart(cart);
+        updateCartDisplay();
+    };
 
+    document.getElementById('view-cart-btn')?.addEventListener('click', () => {
+        cartModal.style.display = 'block';
         updateCartDisplay();
     });
+
+    closeCartButton.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+    });
+
+    updateCartDisplay();
+});
 </script>

@@ -90,8 +90,7 @@ class Database
     {
         // Example usage: 'id = 1'
         try {
-            $conditionPart = implode(
-                separator: ' AND ', array: array_map(callback: fn($key): string => "$key = :$key", array: array_keys($conditions)));
+            $conditionPart = implode(separator: ' AND ', array: array_map(callback: fn($key): string => "$key = :$key", array: array_keys($conditions)));
             $sql = "DELETE FROM $table WHERE $conditionPart";
 
             $stmt = self::getConnection()->prepare(query: $sql);
@@ -101,6 +100,15 @@ class Database
             return $stmt->execute();
         } catch (PDOException $e) {
             die('Erreur de suppression : ' . $e->getMessage());
+        }
+    }
+    public function customRead($query)
+    {
+        try {
+            $stmt = self::getConnection()->query($query);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die('Erreur SQL : ' . $e->getMessage());
         }
     }
 }

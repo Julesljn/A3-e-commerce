@@ -472,123 +472,192 @@ body {
   width: 100vw;
   z-index: -1;
 }
-@media screen and (min-width: 48rem) {
+@media screen and (min-width: 768px) {
   .home-page::before {
     background-image: url("/img/bg-home-tablet.jpg");
   }
 }
-@media screen and (min-width: 64rem) {
+@media screen and (min-width: 1024px) {
   .home-page::before {
-    background-image: url("/img/chien.jpg");
+    background-image: url("/img/ppnoel.webp");
     background-position: center;
     height: 100%;
   }
 }
 
 .home-page {
-  color: #FFFFFF;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  color: #333333;
+  margin: 0 auto;
   width: 90%;
+  text-align: center;
+  z-index: 10;
 }
-@media screen and (min-width: 48rem) {
+@media screen and (min-width: 768px) {
   .home-page {
-    max-width: 445px;
-    padding-bottom: 130px;
-  }
-}
-@media screen and (min-width: 64rem) {
-  .home-page {
-    max-width: 1440px;
     width: 80%;
-    text-align: left;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-bottom: 0;
-    height: 80vh;
   }
 }
-@media screen and (min-width: 64rem) {
-  .home-page__main-content {
-    height: 50%;
-  }
-}
-.home-page__first-paragraph {
-  font-family: "Bellefair", serif;
-  font-size: clamp(1rem, 0.781rem + 1.076vw, 1.75rem);
-  letter-spacing: clamp(0.156rem, 0.116rem + 0.199vw, 0.295rem);
+.home-page h1 {
+  margin: 30px 0;
+  color: #B22222;
+  font-size: 2rem;
   text-transform: uppercase;
 }
-.home-page__main-title {
-  font-family: "Bellefair", serif;
-  font-size: clamp(5rem, 5rem + 4.861vw, 9.375rem);
-  margin-top: 0;
-  margin-bottom: 0;
-  text-transform: uppercase;
-}
-.home-page__description {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: clamp(0.875rem, 0.802rem + 0.359vw, 1.125rem);
-  font-weight: 500;
-  line-height: clamp(1.563rem, 1.435rem + 0.628vw, 2rem);
-  margin-bottom: 80px;
-}
-@media screen and (min-width: 48rem) {
-  .home-page__description {
-    margin-bottom: 156px;
+@media screen and (min-width: 1024px) {
+  .home-page h1 {
+    font-size: 3rem;
   }
 }
-@media screen and (min-width: 64rem) {
-  .home-page__description {
-    margin-bottom: 0px;
-  }
-}
-.home-page__cta {
-  align-items: center;
-  background-color: #FFFFFF;
-  border-radius: 100%;
-  color: #0B0D17;
+.home-page .filters {
   display: flex;
-  font-size: 20px;
-  height: 150px;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  text-transform: uppercase;
-  width: 150px;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
-@media screen and (min-width: 48rem) {
-  .home-page__cta {
-    height: 240px;
-    width: 240px;
-    font-size: 32px;
-  }
+.home-page .filters label {
+  font-weight: bold;
+  color: #333333;
 }
-@media screen and (min-width: 64rem) {
-  .home-page__cta {
-    margin-right: 0;
-  }
+.home-page .filters select {
+  padding: 5px 10px;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+.home-page .filters select:focus {
+  outline: 2px solid #B22222;
 }
 .home-page .products {
-  padding: 20px;
-  border-radius: 30px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
   backdrop-filter: blur(10px);
-  background: rgba(8, 8, 8, 0.2);
 }
 .home-page .product-item {
-  padding: 8px;
-  background-color: black;
+  width: 280px;
+  background-color: #ffffff;
+  border: 1px solid #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.home-page .cart-modal {
+.home-page .product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+.home-page .product-item h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #B22222;
+}
+.home-page .product-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333333;
+}
+.home-page .product-item button {
+  background-color: #B22222;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.home-page .product-item button:hover {
+  background-color: rgb(135.179245283, 25.820754717, 25.820754717);
+}
+.home-page #cart-modal {
+  display: none;
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  width: 300px;
+  background: #ffffff;
+  border: 1px solid #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+.home-page #cart-modal h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #B22222;
+}
+.home-page #cart-modal ul {
+  list-style: none;
+  padding: 0;
+}
+.home-page #cart-modal ul li {
+  margin: 10px 0;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.home-page #cart-modal button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #B22222;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.home-page #cart-modal button:hover {
+  background-color: rgb(135.179245283, 25.820754717, 25.820754717);
+}
+
+html {
+  height: 100%;
+  background: linear-gradient(#123 30%, #667);
+  overflow: hidden;
+}
+
+.snow, .snow:before, .snow:after {
   position: absolute;
-  top: 0;
+  top: -600px;
+  left: 0;
+  bottom: 0;
   right: 0;
+  background-image: radial-gradient(3px 3px at 302px 194px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 327px 95px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 15px 567px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 351px 376px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 436px 330px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 438px 203px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 230px 571px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 346px 133px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 538px 459px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 203px 281px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 286px 239px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 542px 556px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 468px 55px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 563px 531px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 307px 180px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 348px 396px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 290px 376px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 123px 444px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 555px 515px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 124px 414px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 523px 460px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 539px 29px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 247px 505px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 350px 435px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 203px 326px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 246px 244px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 428px 589px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 212px 219px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 341px 26px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 124px 470px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 544px 516px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 471px 583px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 44px 494px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 432px 73px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 304px 264px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 463px 103px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 7px 108px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 43px 359px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 529px 311px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 193px 152px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 396px 397px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 153px 180px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 423px 495px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 337px 165px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 398px 241px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 388px 222px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 219px 139px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 552px 286px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 108px 404px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 374px 526px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 514px 85px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 214px 485px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 384px 442px, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 40px 323px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 557px 471px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 39px 66px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(4px 4px at 350px 12px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 317px 344px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 578px 526px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 333px 590px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 284px 309px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 428px 55px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 420px 11px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0)), radial-gradient(6px 6px at 584px 488px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 333px 187px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 45px 110px, rgba(255, 255, 255, 0.8) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 400px 597px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 565px 523px, rgb(255, 255, 255) 50%, rgba(0, 0, 0, 0)), radial-gradient(5px 5px at 503px 272px, rgba(255, 255, 255, 0.6) 50%, rgba(0, 0, 0, 0)), radial-gradient(3px 3px at 266px 147px, rgba(255, 255, 255, 0.9) 50%, rgba(0, 0, 0, 0));
+  background-size: 600px 600px;
+  animation: snow 3s linear infinite;
+  content: "";
+  z-index: 0;
+}
+
+.snow:after {
+  margin-left: -200px;
+  opacity: 0.4;
+  animation-duration: 6s;
+  animation-direction: reverse;
+  filter: blur(3px);
+}
+
+.snow:before {
+  animation-duration: 9s;
+  animation-direction: reverse;
+  margin-left: -300px;
+  opacity: 0.65;
+  filter: blur(1.5px);
+}
+
+@keyframes snow {
+  to {
+    transform: translateY(600px);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

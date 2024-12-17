@@ -19,7 +19,7 @@ class ProductController extends BaseController
         $products = $this->productRepository->findAll();
 
         $this->render('home.twig', [
-            'products' => $products
+            'products' => $products,
         ]);
     }
 }
