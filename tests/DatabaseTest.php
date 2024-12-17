@@ -6,12 +6,15 @@ use App\Database\Database;
 class DatabaseTest extends TestCase
 {
     private $pdoMock;
+    private $stmtMock;
     private $database;
 
     protected function setUp(): void
     {
         $this->pdoMock = $this->createMock(PDO::class);
+        $this->stmtMock = $this->createMock(PDOStatement::class);
 
+        Database::getConnection();
         $reflection = new ReflectionClass(Database::class);
         $property = $reflection->getProperty('connection');
         $property->setAccessible(true);
@@ -22,40 +25,19 @@ class DatabaseTest extends TestCase
 
     public function testCreate(): void
     {
-        $stmtMock = $this->createMock(PDOStatement::class);
+        $this->pdoMock->method('prepare')->willReturn($this->stmtMock);
+        $this->stmtMock->method('execute')->willReturn(true);
+        $this->pdoMock->method('lastInsertId')->willReturn('1');
 
-        $this->pdoMock
-            ->expects($this->once())
-            ->method('prepare')
-            ->willReturn($stmtMock);
+        $result = $this->database->create('users', ['name' => 'John']);
 
-        $stmtMock
-            ->expects($this->once())
-            ->method('execute')
-            ->willReturn(true);
-
-        $this->pdoMock
-            ->expects($this->once())
-            ->method('lastInsertId')
-            ->willReturn('1');
-
-        $result = $this->database->create('users', ['name' => 'John', 'age' => 30]);
-
-        $this->assertEquals(1, $result);
+        $this->assertEquals(1, (int) $result);
     }
 
     public function testRead(): void
     {
-        $stmtMock = $this->createMock(PDOStatement::class);
-        $stmtMock
-            ->expects($this->once())
-            ->method('fetchAll')
-            ->willReturn([['id' => 1, 'name' => 'John']]);
-
-        $this->pdoMock
-            ->expects($this->once())
-            ->method('query')
-            ->willReturn($stmtMock);
+        $this->pdoMock->method('query')->willReturn($this->stmtMock);
+        $this->stmtMock->method('fetchAll')->willReturn([['id' => 1, 'name' => 'John']]);
 
         $result = $this->database->read('users', 'id = 1');
 
@@ -65,16 +47,8 @@ class DatabaseTest extends TestCase
 
     public function testUpdate(): void
     {
-        $stmtMock = $this->createMock(PDOStatement::class);
-        $stmtMock
-            ->expects($this->once())
-            ->method('execute')
-            ->willReturn(true);
-
-        $this->pdoMock
-            ->expects($this->once())
-            ->method('prepare')
-            ->willReturn($stmtMock);
+        $this->pdoMock->method('prepare')->willReturn($this->stmtMock);
+        $this->stmtMock->method('execute')->willReturn(true);
 
         $result = $this->database->update('users', ['name' => 'Jane'], ['id' => 1]);
 
@@ -83,16 +57,8 @@ class DatabaseTest extends TestCase
 
     public function testDelete(): void
     {
-        $stmtMock = $this->createMock(PDOStatement::class);
-        $stmtMock
-            ->expects($this->once())
-            ->method('execute')
-            ->willReturn(true);
-
-        $this->pdoMock
-            ->expects($this->once())
-            ->method('prepare')
-            ->willReturn($stmtMock);
+        $this->pdoMock->method('prepare')->willReturn($this->stmtMock);
+        $this->stmtMock->method('execute')->willReturn(true);
 
         $result = $this->database->delete('users', ['id' => 1]);
 

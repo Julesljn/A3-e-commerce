@@ -90,7 +90,8 @@ class Database
     {
         // Example usage: 'id = 1'
         try {
-            $conditionPart = implode(separator: ' AND ', array: array_map(callback: fn($key): string => "$key = :$key", array: array_keys($conditions)));
+            $conditionPart = implode(
+                separator: ' AND ', array: array_map(callback: fn($key): string => "$key = :$key", array: array_keys($conditions)));
             $sql = "DELETE FROM $table WHERE $conditionPart";
 
             $stmt = self::getConnection()->prepare(query: $sql);
