@@ -54,10 +54,13 @@ class UserController extends BaseController
 
             $user = $this->userRepository->findByEmail($email);
             if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['userId'] = $user['id'];
+                $_SESSION['firstname'] = $user['firstname'];
                 echo 'Connexion réussie ! Bienvenue ' . $user['firstname'];
             } else {
                 die('Erreur : Email ou mot de passe incorrect.');
             }
+            
         }
     }
 }

@@ -1,0 +1,32 @@
+{% include './includes/header.twig' %}
+
+<h1>Administration - Liste de toutes les commandes</h1>
+
+{% if orders is empty %}
+    <p>Aucune commande n'a été passée.</p>
+{% else %}
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Order ID</th>
+            <th>Utilisateur</th>
+            <th>Produits</th>
+            <th>Statut du Paiement</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.order_id }}</td>
+            <td>{{ order.user.firstname }} {{ order.user.lastname }} (ID: {{ order.user.id }})</td>
+            <td>
+                <ul>
+                    {% for product in order.products %}
+                        <li>{{ product.name }} - {{ product.price }}€ (ID: {{ product.id }})</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ order.payment.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% include './includes/footer.twig' %}

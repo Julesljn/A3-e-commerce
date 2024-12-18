@@ -21,15 +21,13 @@ class UserRepository
             'lastname' => $user->getLastname(),
             'email' => $user->getEmail(),
             'phone' => $user->getPhone(),
-            'password' => $hashedPassword
+            'password' => $hashedPassword,
         ]);
     }
 
     public function findByEmail(string $email): ?array
     {
-        $results = $this->db->read(
-            table: 'user',
-            conditions: "email = '$email'");
+        $results = $this->db->read(table: 'user', conditions: "email = '$email'");
         return $results ? $results[0] : null;
     }
 }

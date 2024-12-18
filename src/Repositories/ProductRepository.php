@@ -14,6 +14,7 @@ class ProductRepository
     {
         $this->db = new Database();
     }
+
     public function getColorsByProductId(int $productId): array
     {
         $query = "
@@ -31,11 +32,11 @@ class ProductRepository
     public function getSizesByProductId(int $productId): array
     {
         $query = "
-        SELECT s.size
-        FROM `size-product` sp
-        JOIN size s ON sp.sizeId = s.id
-        WHERE sp.productId = :productId
-    ";
+            SELECT s.size
+            FROM `size-product` sp
+            JOIN size s ON sp.sizeId = s.id
+            WHERE sp.productId = :productId
+        ";
         $stmt = $this->db->getConnection()->prepare($query);
         $stmt->execute(['productId' => $productId]);
 
@@ -55,5 +56,19 @@ class ProductRepository
         }
 
         return $products;
+    }
+
+    public function findById(int $id): ?Product
+    {
+        $data = $this->db->read('product', "id = $id");
+        if (empty($data)) {
+            return null;
+        }
+
+        $row = $data[0];
+        $colors = $this->getColorsByProductId($row['id']);
+        $sizes = $this->getSizesByProductId($row['id']);
+
+        return new Product(name: $row['name'], price: (float) $row['price'], description: $row['description'], categoryId: (int) $row['categoryId'], brandId: (int) $row['brandId'], id: $row['id'], colors: $colors, sizes: $sizes);
     }
 }

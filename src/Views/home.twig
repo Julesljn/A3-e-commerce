@@ -1,11 +1,20 @@
 {% include './includes/header.twig' %}
-<div class="snow"></div>
+
 <main class="home-page">
+    <div class="connexion">
+        {% if session.userId is defined %}
+        <p>Connecté en tant que {{ session . firstname }} (ID: {{ session . userId }})</p>
+        {% else %}
+        <p>Vous n'êtes pas connecté.</p>
+        {% endif %}
+    </div>
+
     <h1>Catalogue des Produits</h1>
 
     <button id="view-cart-btn" style="margin-bottom: 20px;">
         Voir le Panier 🛒
     </button>
+    <a href="/cart">Voir mon panier complet</a>
 
     <div class="filters">
         <label for="filter-color">Couleur :</label>
@@ -35,22 +44,15 @@
 
     <div class="products">
         {% for product in products %}
-        <div class="product-item"
-             data-color="{{ product.getColors | join(',') }}"
-             data-size="{{ product.getSizes | join(',') }}"
-             data-price="{{ product.getPrice }}">
-            <h2>{{ product.getName }}</h2>
-            <p>{{ product.getDescription }}</p>
-            <p>Prix : {{ product.getPrice }} €</p>
-            <p>Couleurs : {{ product.getColors | join(', ') }}</p>
-            <p>Tailles : {{ product.getSizes | join(', ') }}</p>
+        <div class="product-item" data-color="{{ (product . getColors) | join(',') }}"
+            data-size="{{ (product . getSizes) | join(',') }}" data-price="{{ product . getPrice }}">
+            <h2>{{ product . getName }}</h2>
+            <p>{{ product . getDescription }}</p>
+            <p>Prix : {{ product . getPrice }} €</p>
+            <p>Couleurs : {{ (product . getColors) | join(', ') }}</p>
+            <p>Tailles : {{ (product . getSizes) | join(', ') }}</p>
 
-            <button class="add-to-cart-btn"
-                    data-id="{{ product.getId }}"
-                    data-name="{{ product.getName }}"
-                    data-price="{{ product.getPrice }}">
-                Ajouter au panier
-            </button>
+            <a href="/product/detail?id={{ product . getId }}">Voir le détail</a>
         </div>
         {% endfor %}
     </div>
@@ -65,113 +67,90 @@
 
 {% include './includes/footer.twig' %}
 
-
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const filterColor = document.getElementById('filter-color');
-    const filterSize = document.getElementById('filter-size');
-    const filterPrice = document.getElementById('filter-price');
-    const products = document.querySelectorAll('.product-item');
+        const filterColor = document.getElementById('filter-color');
+        const filterSize = document.getElementById('filter-size');
+        const filterPrice = document.getElementById('filter-price');
+        const products = document.querySelectorAll('.product-item');
 
-    const filterProducts = () => {
-        const selectedColor = filterColor.value.toLowerCase();
-        const selectedSize = filterSize.value;
-        const selectedPrice = filterPrice.value;
+        const filterProducts = () => {
+            const selectedColor = filterColor.value.toLowerCase();
+            const selectedSize = filterSize.value;
+            const selectedPrice = filterPrice.value;
 
-        products.forEach(product => {
-            const productColors = product.dataset.color.toLowerCase();
-            const productSizes = product.dataset.size;
-            const productPrice = parseFloat(product.dataset.price);
+            products.forEach(product => {
+                const productColors = product.dataset.color.toLowerCase();
+                const productSizes = product.dataset.size;
+                const productPrice = parseFloat(product.dataset.price);
 
-            const colorMatch = !selectedColor || productColors.includes(selectedColor);
-            const sizeMatch = !selectedSize || productSizes.includes(selectedSize);
-            let priceMatch = false;
+                const colorMatch = !selectedColor || productColors.includes(selectedColor);
+                const sizeMatch = !selectedSize || productSizes.includes(selectedSize);
+                let priceMatch = false;
 
-            switch (selectedPrice) {
-                case 'low':
-                    priceMatch = productPrice < 30;
-                    break;
-                case 'mid':
-                    priceMatch = productPrice >= 30 && productPrice <= 50;
-                    break;
-                case 'high':
-                    priceMatch = productPrice > 50;
-                    break;
-                default:
-                    priceMatch = true;
-            }
+                switch (selectedPrice) {
+                    case 'low':
+                        priceMatch = productPrice < 30;
+                        break;
+                    case 'mid':
+                        priceMatch = productPrice >= 30 && productPrice <= 50;
+                        break;
+                    case 'high':
+                        priceMatch = productPrice > 50;
+                        break;
+                    default:
+                        priceMatch = true;
+                }
 
-            product.style.display = colorMatch && sizeMatch && priceMatch ? 'block' : 'none';
-        });
-    };
-
-    filterColor.addEventListener('change', filterProducts);
-    filterSize.addEventListener('change', filterProducts);
-    filterPrice.addEventListener('change', filterProducts);
-
-    // Gestion du panier
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    const cartModal = document.getElementById('cart-modal');
-    const cartItemsList = document.getElementById('cart-items');
-    const closeCartButton = document.getElementById('close-cart-btn');
-
-    const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
-    const saveCart = (cart) => localStorage.setItem('cart', JSON.stringify(cart));
-
-    const updateCartDisplay = () => {
-        const cart = getCart();
-        cartItemsList.innerHTML = cart.length === 0 
-            ? '<li>Votre panier est vide.</li>' 
-            : cart.map((item, index) => `
-                <li>
-                    ${item.name} - ${item.price}€ x ${item.quantity}
-                    <button class="remove-from-cart-btn" data-index="${index}">Supprimer</button>
-                </li>`).join('');
-
-        document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const index = e.target.dataset.index;
-                removeFromCart(index);
+                product.style.display = colorMatch && sizeMatch && priceMatch ? 'block' : 'none';
             });
-        });
-    };
+        };
 
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        filterColor.addEventListener('change', filterProducts);
+        filterSize.addEventListener('change', filterProducts);
+        filterPrice.addEventListener('change', filterProducts);
+
+        const cartModal = document.getElementById('cart-modal');
+        const cartItemsList = document.getElementById('cart-items');
+        const closeCartButton = document.getElementById('close-cart-btn');
+
+        const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+        const saveCart = (cart) => localStorage.setItem('cart', JSON.stringify(cart));
+
+        const updateCartDisplay = () => {
             const cart = getCart();
-            const existingProduct = cart.find(item => item.id === button.dataset.id);
-            if (existingProduct) {
-                existingProduct.quantity += 1;
-            } else {
-                cart.push({
-                    id: button.dataset.id,
-                    name: button.dataset.name,
-                    price: button.dataset.price,
-                    quantity: 1
+            cartItemsList.innerHTML = cart.length === 0 ?
+                '<li>Votre panier est vide.</li>' :
+                cart.map((item, index) => `
+                    <li>
+                        ${item.name} - ${item.price}€ x ${item.quantity}
+                        <button class="remove-from-cart-btn" data-index="${index}">Supprimer</button>
+                    </li>`).join('');
+
+            document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.dataset.index;
+                    removeFromCart(index);
                 });
-            }
+            });
+        };
+
+        const removeFromCart = (index) => {
+            const cart = getCart();
+            cart.splice(index, 1);
             saveCart(cart);
             updateCartDisplay();
+        };
+
+        document.getElementById('view-cart-btn')?.addEventListener('click', () => {
+            cartModal.style.display = 'block';
+            updateCartDisplay();
         });
-    });
 
-    const removeFromCart = (index) => {
-        const cart = getCart();
-        cart.splice(index, 1);
-        saveCart(cart);
-        updateCartDisplay();
-    };
+        closeCartButton.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
 
-    document.getElementById('view-cart-btn')?.addEventListener('click', () => {
-        cartModal.style.display = 'block';
         updateCartDisplay();
     });
-
-    closeCartButton.addEventListener('click', () => {
-        cartModal.style.display = 'none';
-    });
-
-    updateCartDisplay();
-});
 </script>

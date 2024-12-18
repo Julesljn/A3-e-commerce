@@ -1,0 +1,44 @@
+{% include './includes/header.twig' %}
+
+<main class="product-detail">
+    <h1>{{ product.getName }}</h1>
+    <p class="description">{{ product.getDescription }}</p>
+    <p class="price">Prix : <span>{{ product.getPrice }} €</span></p>
+    <p class="colors">Couleurs : {{ product.getColors | join(', ') }}</p>
+    <p class="sizes">Tailles : {{ product.getSizes | join(', ') }}</p>
+
+    <button class="add-to-cart-btn"
+            data-id="{{ product.getId }}"
+            data-name="{{ product.getName }}"
+            data-price="{{ product.getPrice }}">
+        Ajouter au panier
+    </button>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const addToCartButton = document.querySelector('.add-to-cart-btn');
+
+        const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+        const saveCart = (cart) => localStorage.setItem('cart', JSON.stringify(cart));
+
+        addToCartButton.addEventListener('click', () => {
+            const cart = getCart();
+            const existingProduct = cart.find(item => item.id === addToCartButton.dataset.id);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({
+                    id: addToCartButton.dataset.id,
+                    name: addToCartButton.dataset.name,
+                    price: addToCartButton.dataset.price,
+                    quantity: 1
+                });
+            }
+            saveCart(cart);
+            alert('Produit ajouté au panier');
+        });
+    });
+</script>
+
+{% include './includes/footer.twig' %}

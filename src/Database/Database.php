@@ -24,24 +24,27 @@ class Database
     }
 
     public function create($table, $data)
-    {
-        // Example usage: ['name' => 'John', 'age' => 30]
-        try {
-            $columns = implode(separator: ', ', array: array_keys($data));
-            $placeholders = ':' . implode(separator: ', :', array: array_keys($data));
-            $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+{
+    try {
+        $columns = implode(', ', array_keys($data));
+        $placeholders = ':' . implode(', :', array_keys($data));
+        
+        $sql = "INSERT INTO `$table` ($columns) VALUES ($placeholders)";
 
-            $stmt = self::getConnection()->prepare(query: $sql);
-            foreach ($data as $key => $value) {
-                $stmt->bindValue(param: ":$key", value: $value);
-            }
-            $stmt->execute();
-
-            return self::getConnection()->lastInsertId();
-        } catch (PDOException $e) {
-            die('Erreur d\'insertion : ' . $e->getMessage());
+        $stmt = self::getConnection()->prepare($sql);
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(":$key", $value);
         }
+        $stmt->execute();
+
+        return self::getConnection()->lastInsertId();
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+        exit;
     }
+}
+
 
     public function read($table, $conditions = '')
     {

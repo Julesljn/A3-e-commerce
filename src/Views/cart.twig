@@ -1,0 +1,113 @@
+{% include './includes/header.twig' %}
+
+<h1>Votre Panier</h1>
+<ul id="cart-items"></ul>
+
+<form id="payment-form">
+    <div id="card-element"><!-- Élément Stripe pour la carte --></div>
+    <button id="submit-btn" type="button">Payer</button>
+    <div id="card-errors" role="alert" style="color: red; margin-top: 10px;"></div>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const stripe = Stripe(
+            'pk_test_51QXKgGPVlFxktLOkQhwNzvEkpfkXPPrbcjFfeiKCmevve0ofEGMskVaSMIYXOdeSCODG6fYHPi5wEQxCFy0yjUaV005nNemSFu'
+        );
+        const elements = stripe.elements();
+
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    }
+                },
+                invalid: {
+                    color: '#fa755a'
+                }
+            }
+        });
+        cardElement.mount('#card-element');
+
+        // Sélection des éléments HTML
+        const form = document.getElementById('payment-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const cartItemsList = document.getElementById('cart-items');
+
+        // Récupération du panier
+        const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+        const updateCartDisplay = () => {
+            const cart = getCart();
+            cartItemsList.innerHTML = cart.length === 0 ?
+                '<li>Votre panier est vide.</li>' :
+                cart.map((item) => `<li>${item.name} - ${item.price}€ x ${item.quantity}</li>`).join('');
+        };
+
+        updateCartDisplay();
+
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const cart = getCart();
+            if (cart.length === 0) {
+                alert('Votre panier est vide.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/order/place', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'cart=' + encodeURIComponent(JSON.stringify(cart))
+                });
+                const data = await response.json();
+
+                if (!data.success || !data.clientSecret) {
+                    throw new Error('Erreur lors de la commande : ' + (data.error || 'Inconnue'));
+                }
+                const {
+                    error,
+                    paymentIntent
+                } = await stripe.confirmCardPayment(data.clientSecret, {
+                    payment_method: {
+                        card: cardElement
+                    }
+                });
+
+                const paymentStatus = error ? 'failed' : paymentIntent.status;
+
+                await fetch('/order/confirm-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify({
+                        orderId: data.orderId,
+                        status: paymentStatus
+                    })
+                });
+
+                if (paymentStatus === 'succeeded') {
+                    alert('Paiement réussi !');
+                    localStorage.removeItem('cart');
+                    updateCartDisplay();
+                } else {
+                    alert('Paiement échoué. Veuillez réessayer.');
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('card-errors').textContent = err.message;
+            }
+        });
+
+    });
+</script>
+
+{% include './includes/footer.twig' %}

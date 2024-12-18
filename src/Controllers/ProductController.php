@@ -22,4 +22,27 @@ class ProductController extends BaseController
             'products' => $products,
         ]);
     }
+
+    public function showDetail(): void
+    {
+        $productId = $_GET['id'] ?? null;
+        if (!$productId) {
+            header('Location: /');
+            exit;
+        }
+
+        $product = $this->productRepository->findById((int)$productId);
+        if (!$product) {
+            header('Location: /');
+            exit;
+        }
+
+        $this->render('productDetail.twig', [
+            'product' => $product,
+        ]);
+    }
+    public function showCart(): void
+    {
+        $this->render('cart.twig');
+    }
 }

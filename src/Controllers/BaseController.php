@@ -13,13 +13,14 @@ class BaseController
     {
         $loader = new FilesystemLoader(__DIR__ . '/../Views');
         $this->twig = new Environment($loader, [
-            'cache' => false, 
+            'cache' => false,
             'debug' => true,
         ]);
     }
 
-    protected function render(string $template, array $data = []): void
+    public function render(string $template, array $data = []): void
     {
+        $data['session'] = $_SESSION;
         echo $this->twig->render($template, $data);
     }
 }
