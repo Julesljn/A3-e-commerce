@@ -67,12 +67,11 @@ class OrderController extends BaseController
 
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
-                'amount' => $amount * 100, // Montant en centimes
+                'amount' => $amount * 100,
                 'currency' => 'eur',
                 'metadata' => ['order_id' => $orderId],
             ]);
 
-            // Retourner uniquement le client_secret
             return [
                 'status' => 'requires_confirmation',
                 'clientSecret' => $paymentIntent->client_secret,
